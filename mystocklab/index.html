@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>MyStock Lab</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- 테마 색 (상단 바) -->
+    <meta name="theme-color" content="#101820" />
+
+    <!-- iOS PWA 지원 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="MyStock" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- 서비스 워커 등록 -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('[SW] 등록 완료:', reg.scope))
+            .catch(err => console.warn('[SW] 등록 실패:', err))
+        })
+      }
+    </script>
+  </body>
+</html>
